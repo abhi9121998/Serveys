@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Self Created Survey</title>
+        <script type="text/javascript">
+            function createQuestionField(type){
+                var answer_type;
+                var br=document.createElement("br");
+                var br1=document.createElement("br");
+                var br2=document.createElement("br");
+                var answer=document.getElementById("answer");
+                if(type==="text" || type==="number")
+                {
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", 'text');
+                    answer_type.setAttribute("placeholder", 'Answer');
+                    answer_type.setAttribute("name", type);
+                    
+                    answer.appendChild(br);
+                    answer.appendChild(br1);
+                    answer.appendChild(answer_type);
+                }
+                if(type==="radiomcq")
+                {
+                    answer.appendChild(br);
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", 'radio');
+                    answer_type.setAttribute("value", 'mcq1');
+                    answer_type.setAttribute("name", type);
+                    
+                    answer.appendChild(answer_type);
+                    
+                    
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", 'text');
+                    answer_type.setAttribute("placeholder", 'Value');
+                    answer_type.setAttribute("name", type);
+                    answer.appendChild(answer_type);
+                    answer.appendChild(br1);
+                }
+                if(type==="radioyn")
+                {
+                    for(var i=0; i<2; i++)
+                    {
+                        answer_type=document.createElement("input");
+                        answer_type.setAttribute("type", 'radio');
+                        answer_type.setAttribute("value", 'mcqm');
+                        answer_type.setAttribute("name", type);
+                        answer.appendChild(br);
+                        answer.appendChild(answer_type);
+                    
+                        answer_type=document.createElement("input");
+                        answer_type.setAttribute("type", 'text');
+                        if(i==0)
+                            answer_type.setAttribute("value", 'Yes');
+                        else
+                            answer_type.setAttribute("value", 'No');
+                        answer_type.setAttribute("name", type);
+                        answer.appendChild(answer_type);
+                        answer.appendChild(br1);
+                    }
+                }
+                if(type==="checkbox")
+                {
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", type);
+                    answer_type.setAttribute("value", 'mcqm');
+                    answer_type.setAttribute("name", type);
+                    answer.appendChild(br);
+                    answer.appendChild(answer_type);
+                    
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", 'text');
+                    answer_type.setAttribute("placeholder", 'Value');
+                    answer_type.setAttribute("name", type);
+                    answer.appendChild(answer_type);
+                }
+                if(type==='date')
+                {
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", type);
+                    answer_type.setAttribute("name", type);
+                    answer.appendChild(br);
+                    answer.appendChild(br1);
+                    answer.appendChild(answer_type);
+                }
+                if(type==='time')
+                {
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", type);
+                    answer_type.setAttribute("name", type);
+                    answer.appendChild(br);
+                    answer.appendChild(br1);
+                    answer.appendChild(answer_type);
+                }
+                if(type==='range')
+                {
+                    answer_type=document.createElement("input");
+                    answer_type.setAttribute("type", type);
+                    answer_type.setAttribute("name", type);
+                    answer.appendChild(br);
+                    answer.appendChild(br1);
+                    answer.appendChild(answer_type);
+                }
+            }
+            
+            function addQues()
+            {
+                var answer=document.getElementById("answer");
+                var answer_type;
+                var br=document.createElement("br");
+                var br1=document.createElement("br");
+                
+                answer_type=document.createElement("input");
+                answer_type.setAttribute("type", 'text');
+                answer_type.setAttribute("name", 'ques');
+                answer_type.setAttribute("placeholder", 'Enter Question');
+                answer.appendChild(br);
+                answer.appendChild(br1);
+                answer.appendChild(answer_type);
+                
+                /*answer_type=document.createElement("label");
+                answer_type.setAttribute("name", 'ans');
+                answer_type.setAttribute("text", 'Select Answer Type : ');
+                //answer_type.text = 'Select Answer Type : ';
+                answer.appendChild(br);
+                answer.appendChild(br1);
+                answer.appendChild(answer_type);
+                */
+                var select=document.createElement("select")
+                select.setAttribute("id", "element");
+                answer.appendChild(select);
+                
+                var array = ["Text", "Number", "MCQ-1", "MCQ-Multi", "yes/no", "Range", "Date", "Time"];
+                for (var i = 0; i < array.length; i++) 
+                {
+                    var option = document.createElement("option");
+                    option.setAttribute("value", array[i]);
+                    option.text = array[i];
+                    select.appendChild(option);
+                }
+                answer_type=document.createElement("input");
+                answer_type.setAttribute("type", 'button');
+                answer_type.setAttribute("value", 'add');
+                answer_type.setAttribute("name", 'add');
+                answer_type.setAttribute("onclick", 'createQuestionField(document.forms[0].element.value');
+                answer.appendChild(answer_type);
+            }
+        </script>
+    </head>
+    <body>
+        <center>
+            <div>
+            <form id="survey" name="survey">
+                <div>
+                    <h2>Create Survey</h2>
+                    Form Name : <input type="text" name="formName" placeholder="Form Name"/><br><br>
+                    Form Type : <input type="text" name="formType" placeholder="Form Type"/><br><br>
+                    Form Description : <input type="text" name="formDesc" placeholder="Form Description..."/><br><br>
+                </div>
+                <div id="answer">
+                    <label id="ques">Q : </label>
+                    <input type="text" name="ques" placeholder="Enter Question"/><br><br>
+                    <label id="Qtype">Select Answer Type : </label>
+                    <SELECT name="element">
+                        <OPTION value="text">Text</OPTION>
+                        <OPTION value="number">Number</OPTION>
+                        <OPTION value="radiomcq">MCQ-1</OPTION>
+                        <OPTION value="checkbox">MCQ-Multi</OPTION>
+                        <OPTION value="radioyn">yes/no</OPTION>
+                        <OPTION value="range">Range</OPTION>
+                        <OPTION value="date">Date</OPTION>
+                        <OPTION value="time">Time</OPTION>
+                    </SELECT>
+                    <input type="button" id="add" name="add" value="add" onclick="createQuestionField(document.forms[0].element.value)"/>
+                </div>
+                <div>  
+                    <br><br><input type="button" id="addQ" name="addQ" value="Add Question" onclick="addQues()"/>
+                    <br><br><input type="submit" name="create" value="Create"/>
+                </div>
+            </form>
+            </div>
+        </center>
+    </body>
+</html>
