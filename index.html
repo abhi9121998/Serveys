@@ -19,7 +19,7 @@ and open the template in the editor.
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", 'text');
                     answer_type.setAttribute("placeholder", 'Answer');
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     
                     answer.appendChild(br);
                     answer.appendChild(br1);
@@ -31,7 +31,7 @@ and open the template in the editor.
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", 'radio');
                     answer_type.setAttribute("value", 'mcq1');
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     
                     answer.appendChild(answer_type);
                     
@@ -39,7 +39,7 @@ and open the template in the editor.
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", 'text');
                     answer_type.setAttribute("placeholder", 'Value');
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     answer.appendChild(answer_type);
                     answer.appendChild(br1);
                 }
@@ -50,8 +50,8 @@ and open the template in the editor.
                         answer_type=document.createElement("input");
                         answer_type.setAttribute("type", 'radio');
                         answer_type.setAttribute("value", 'mcqm');
-                        answer_type.setAttribute("name", type);
-                        answer.appendChild(br);
+                        answer_type.setAttribute("name", 'ans');
+                        answer.appendChild(br1);
                         answer.appendChild(answer_type);
                     
                         answer_type=document.createElement("input");
@@ -60,7 +60,7 @@ and open the template in the editor.
                             answer_type.setAttribute("value", 'Yes');
                         else
                             answer_type.setAttribute("value", 'No');
-                        answer_type.setAttribute("name", type);
+                        answer_type.setAttribute("name", 'ans');
                         answer.appendChild(answer_type);
                         answer.appendChild(br1);
                     }
@@ -70,21 +70,21 @@ and open the template in the editor.
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", type);
                     answer_type.setAttribute("value", 'mcqm');
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     answer.appendChild(br);
                     answer.appendChild(answer_type);
                     
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", 'text');
                     answer_type.setAttribute("placeholder", 'Value');
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     answer.appendChild(answer_type);
                 }
                 if(type==='date')
                 {
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", type);
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     answer.appendChild(br);
                     answer.appendChild(br1);
                     answer.appendChild(answer_type);
@@ -93,7 +93,7 @@ and open the template in the editor.
                 {
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", type);
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     answer.appendChild(br);
                     answer.appendChild(br1);
                     answer.appendChild(answer_type);
@@ -102,7 +102,7 @@ and open the template in the editor.
                 {
                     answer_type=document.createElement("input");
                     answer_type.setAttribute("type", type);
-                    answer_type.setAttribute("name", type);
+                    answer_type.setAttribute("name", 'ans');
                     answer.appendChild(br);
                     answer.appendChild(br1);
                     answer.appendChild(answer_type);
@@ -124,31 +124,29 @@ and open the template in the editor.
                 answer.appendChild(br1);
                 answer.appendChild(answer_type);
                 
-                /*answer_type=document.createElement("label");
-                answer_type.setAttribute("name", 'ans');
-                answer_type.setAttribute("text", 'Select Answer Type : ');
-                //answer_type.text = 'Select Answer Type : ';
-                answer.appendChild(br);
-                answer.appendChild(br1);
-                answer.appendChild(answer_type);
-                */
-                var select=document.createElement("select")
+                var select=document.createElement("select");
                 select.setAttribute("id", "element");
+                select.setAttribute("name", "element");
                 answer.appendChild(select);
                 
-                var array = ["Text", "Number", "MCQ-1", "MCQ-Multi", "yes/no", "Range", "Date", "Time"];
+                var array = ["text", "number", "radiomcq", "checkbox", "radioyn", "range", "date", "time"];
+                var array1 = ["Text", "Number", "MCQ-1", "MCQ-Multi", "yes/no", "Range", "Date", "Time"];
                 for (var i = 0; i < array.length; i++) 
                 {
                     var option = document.createElement("option");
                     option.setAttribute("value", array[i]);
-                    option.text = array[i];
+                    option.text = array1[i];
                     select.appendChild(option);
                 }
                 answer_type=document.createElement("input");
                 answer_type.setAttribute("type", 'button');
                 answer_type.setAttribute("value", 'add');
                 answer_type.setAttribute("name", 'add');
-                answer_type.setAttribute("onclick", 'createQuestionField(document.forms[0].element.value');
+                //var ele=document.getElementsByName("element");
+                // e=ele.options[ele.selectedIndex].value;
+                var e=document.forms[0].element.value;
+                //alert(type);
+                answer_type.setAttribute("onclick", "createQuestionField("+e+")");
                 answer.appendChild(answer_type);
             }
         </script>
@@ -156,12 +154,15 @@ and open the template in the editor.
     <body>
         <center>
             <div>
-            <form id="survey" name="survey">
+                <form id="survey" name="survey" action="CreatedSurvey" method="GET">
                 <div>
                     <h2>Create Survey</h2>
-                    Form Name : <input type="text" name="formName" placeholder="Form Name"/><br><br>
-                    Form Type : <input type="text" name="formType" placeholder="Form Type"/><br><br>
-                    Form Description : <input type="text" name="formDesc" placeholder="Form Description..."/><br><br>
+                    <!--Organisation Name : <input type="text" name="orgName" placeholder="Organisation Name"/><br><br>
+                    E-mail id : <input type="text" name="email" placeholder="E-mail"/><br><br>-->
+                    Survey Name : <input type="text" name="formName" placeholder="Form Name"/><br><br>
+                    Survey Type : <input type="text" name="formType" placeholder="Form Type"/><br><br>
+                    Survey Description : <input type="text" name="formDesc" placeholder="Form Description..."/><br><br>
+                    Duration (in Days) : <input type="number" name="duration"/><br><br>
                 </div>
                 <div id="answer">
                     <label id="ques">Q : </label>
